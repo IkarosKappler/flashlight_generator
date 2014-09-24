@@ -14,7 +14,7 @@
 
 
 // Will be initialised on initWebGL()
-this.bezierCanvasHandler   = null;
+//this.bezierCanvasHandler   = null;
 this.previewCanvasHandler  = null;
 
 this.keyHandler            = null;
@@ -157,11 +157,12 @@ function onloadHandler() {
  
 
     // Try to load dildo design from last session cookie (if allowed and if no data is passed)
+    /*
     if( _DILDO_CONFIG && _DILDO_CONFIG.AUTOLOAD_ENABLED && !params.rbdata )
 	loadFromCookie(true); // retainErrorStatus
     if( params.rbdata )
 	_applyReducedBezierData( params.rbdata );
-    
+    */
 
     displayBendingValue();
     toggleFormElementsEnabled();
@@ -174,6 +175,7 @@ function onloadHandler() {
 	acquireOptimalBezierView();
     }
 
+    //window.alert( "X" );
     
     // Is the rendering engine available?
     // Does this browser support WebGL?
@@ -304,6 +306,7 @@ function getPreviewMeshes() {
     return previewCanvasHandler.getMeshes();
 }
 
+/*
 function bezier_undo() {
     var hasMoreUndoSteps = this.bezierCanvasHandler.undo();
     
@@ -314,6 +317,7 @@ function bezier_undo() {
 function bezier_redo() {
     var hasMoreRedoteps = this.bezierCanvasHandler.redo();
 }
+*/
 
 /*
 function setBezierPathFromJSONString( bezierString ) {
@@ -324,29 +328,39 @@ function setBezierPathFromJSONString( bezierString ) {
 
 function setBezierPath( bezierPath ) {
 
-    this.bezierCanvasHandler.setBezierPath( bezierPath );    
-    preview_rebuild_model();
+    console.log( "[WARNING] setBezierPath() is not implemented here!" );
+    //this.bezierCanvasHandler.setBezierPath( bezierPath );    
+    //preview_rebuild_model();
 }
 
 function getBezierPath() {
-    return this.bezierCanvasHandler.bezierPath;
+    var bezierPath = null;
+    try {
+	bezierPath = IKRS.BezierPath.fromJSON( getDefaultBezierJSON() );		    
+    } catch( e ) {
+	window.alert( "Error: " + e );
+	return false;
+    }
+    return bezierPath;
+    //return this.bezierCanvasHandler.bezierPath;
 }
 
 function initWebGL() {
 
     try {
-	this.bezierCanvasHandler = new IKRS.BezierCanvasHandler();
-	this.bezierCanvasHandler.addChangeListener( updateBezierStatistics );  // A function
-	this.previewCanvasHandler = new IKRS.PreviewCanvasHandler( this.bezierCanvasHandler,
-								   PREVIEW_CANVAS_WIDTH,     // 512, 
-								   PREVIEW_CANVAS_HEIGHT     // 768 
-								 );
+	//this.bezierCanvasHandler = new IKRS.BezierCanvasHandler();
+	//this.bezierCanvasHandler.addChangeListener( updateBezierStatistics );  // A function
+	
+	this.previewCanvasHandler = new IKRS.FlashlightCanvasHandler( PREVIEW_CANVAS_WIDTH,     // 512, 
+								      PREVIEW_CANVAS_HEIGHT     // 768 
+								    );
+	
     
 	// Indicate success.
 	setStatus( "WebGL initialized. Ready." );
 	return true;
     } catch( e ) {
-	console.log( "Error: failed to initiate canvas handlers. Is WebGL enabled/supported?" );
+	console.log( "Error: failed to initiate canvas handlers. Is WebGL enabled/supported? " + e );
 	setStatus( "Error: failed to initiate canvas handlers. Is WebGL enabled/supported?" );
 	// Indicate error.
 	return false;
@@ -357,6 +371,9 @@ function initWebGL() {
  * Signature as a bezier canvas listener :)
  **/
 function updateBezierStatistics( source, event ) {
+    
+    /*
+    
     if( event && event.nextEventFollowing )
 	return; // Wait for last event in sequence, THEN update (saves resources)
 
@@ -407,6 +424,8 @@ function updateBezierStatistics( source, event ) {
     document.getElementById( "volume_and_weight" ).innerHTML = makeTable( tableData );
 
     preview_rebuild_model();
+
+*/
 }
 
 function makeTable( tableData ) {

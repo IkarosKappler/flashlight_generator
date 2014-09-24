@@ -24,8 +24,8 @@ if( !_DILDO_CONFIG.IMAGES || typeof _DILDO_CONFIG.IMAGES === "undefined" )
  * Set this flag to true if you wish the Model->Publish item to be hidden.
  * Valid values: true|false
  **/
-_DILDO_CONFIG.HIDE_PUBLISH_MESH_MENU       = !isDildoGeneratorDomain();  
-//_DILDO_CONFIG.HIDE_PUBLISH_MESH_MENU       = false; 
+//_DILDO_CONFIG.HIDE_PUBLISH_MESH_MENU       = !isDildoGeneratorDomain();  
+_DILDO_CONFIG.HIDE_PUBLISH_MESH_MENU       = true; 
 
 
 /**
@@ -41,8 +41,8 @@ _DILDO_CONFIG.HIDE_EXPORT_MESH_MENU       = false;
  * Set this flag to true if you wish the whole Print menu to be hidden.
  * Valid values: true|false
  **/
-//_DILDO_CONFIG.HIDE_PRINT_MENU             = false; // true|false
-_DILDO_CONFIG.HIDE_PRINT_MENU             = !isDildoGeneratorDomain(); 
+_DILDO_CONFIG.HIDE_PRINT_MENU             = true; // true|false
+//_DILDO_CONFIG.HIDE_PRINT_MENU             = !isDildoGeneratorDomain(); 
 
 /**
  * Set the Print->Order_Print sub menu action to the specific javascript action (string).
